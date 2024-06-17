@@ -9,7 +9,7 @@ record()
 
 genai.configure(model_api_key=os.getenv('MODEL_API_KEY'))
 
-model = genai.GenerativeModel(model_name='gemini-1.5-pro')
+model = genai.GenerativeModel(model_name='gemini-1.5-flash')
 response = model.generate_content(speech_to_text())
 
 print(response.text)

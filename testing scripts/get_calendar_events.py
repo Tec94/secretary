@@ -9,28 +9,28 @@ from googleapiclient.errors import HttpError
 
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
 
-def main():
+def get_calendar_events():
     creds = None
 
-    if os.path.exists('token.json'):
-        creds = Credentials.from_authorized_user_file('token.json')
+    if os.path.exists('./testing scripts/token.json'):
+        creds = Credentials.from_authorized_user_file('./testing scripts/token.json')
 
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
-    else:
-        flow = InstalledAppFlow.from_client_secrets_file("credentials.json", SCOPES)
-        creds = flow.run_local_server(port=0)
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file("./testing scripts/credentials.json", SCOPES)
+            creds = flow.run_local_server(port=0)
 
-    with open("token.json", "w") as token:
-        token.write(creds.to_json())
+        with open("./testing scripts/token.json", "w") as token:
+            token.write(creds.to_json())
 
     try:
         service = build('calendar', 'v3', credentials=creds)
 
         now = datetime.datetime.now().isoformat() + 'Z'
 
-        events_result = service.events().list(calendarId='primary', timeMin=now, maxResults=10, singleEvents=True, orderBy='startTime',).execute()
+        events_result = service.events().list(calendarId='primary', timeMin=now, maxResults=10, singleEvents=True, orderBy='startTime').execute()
         events = events_result.get("items", [])
 
         if not events:
@@ -42,6 +42,3 @@ def main():
             print(start, event["summary"])
     except HttpError as error:
         print('An error has occured:', error)
-
-if __name__ == "__main__":
-    main()

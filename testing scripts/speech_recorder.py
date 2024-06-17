@@ -16,11 +16,9 @@ def record():
 					samplerate=freq, channels=2)
 
 	# Record audio for the given number of seconds
+	print('Listening...')
 	sd.wait()
 
 	# This will convert the NumPy array to an audio
 	# file with the given sampling frequency
 	write("recording0.wav", freq, recording)
-
-	# Convert the NumPy array to audio file
-	wv.write("recording1.wav", recording, freq, sampwidth=2)

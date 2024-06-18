@@ -7,8 +7,9 @@ from get_calendar_events import get_calendar_events
 load_env()
 record()
 
-genai.configure(model_api_key=os.getenv('MODEL_API_KEY'))
+genai.configure(api_key=os.getenv('MODEL_API_KEY'))
 
+# 15 requests per min
 model = genai.GenerativeModel(model_name='gemini-1.5-flash')
 response = model.generate_content(speech_to_text())
 

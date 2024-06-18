@@ -1,0 +1,5 @@
+recordings
+credentials.json
+.env
+__pycache__
+token.json

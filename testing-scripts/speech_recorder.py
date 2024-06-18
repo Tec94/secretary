@@ -18,7 +18,8 @@ def record():
 	# Record audio for the given number of seconds
 	print('Listening...')
 	sd.wait()
+	print('Stop speaking.')
 
 	# This will convert the NumPy array to an audio
 	# file with the given sampling frequency
-	write("recording0.wav", freq, recording)
+	write("./testing scripts/recordings/recording0.wav", freq, recording)
